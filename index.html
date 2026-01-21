@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edivaldo Bezerra | Engenheiro de Soluções</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #16161f;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #00d4aa;
+            --accent-secondary: #0099ff;
+            --accent-tertiary: #ff6b35;
+            --border-color: #252530;
+            --gradient-primary: linear-gradient(135deg, #00d4aa 0%, #0099ff 100%);
+            --gradient-secondary: linear-gradient(135deg, #0099ff 0%, #6366f1 100%);
+            --gradient-tertiary: linear-gradient(135deg, #ff6b35 0%, #ff9f1c 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Pattern Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-primary);
+        }
+
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -200px;
+            background: var(--accent-secondary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 24px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Expertise Cards */
+        .expertise-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .expertise-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+        }
+
+        .expertise-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .expertise-card:nth-child(1) .expertise-icon {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 153, 255, 0.1));
+            color: var(--accent-secondary);
+        }
+
+        .expertise-card:nth-child(2) .expertise-icon {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.2), rgba(0, 212, 170, 0.1));
+            color: var(--accent-primary);
+        }
+
+        .expertise-card:nth-child(3) .expertise-icon {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.1));
+            color: var(--accent-tertiary);
+        }
+
+        .expertise-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .expertise-description {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .expertise-projects {
+            margin-bottom: 24px;
+        }
+
+        .expertise-projects h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .project-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid transparent;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .project-item:hover {
+            border-color: var(--border-color);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .project-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .project-content h5 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .project-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* How I Work Section */
+        .how-i-work {
+            background: var(--bg-secondary);
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .approach-card {
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .approach-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .approach-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .approach-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .cta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 64px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: var(--gradient-primary);
+        }
+
+        .cta-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 32px;
+            }
+
+            .expertise-card {
+                padding: 28px;
+            }
+
+            .cta-box {
+                padding: 48px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <nav>
+        <div class="container">
+            <div class="logo">&lt;edivaldo/&gt;</div>
+            <ul class="nav-links">
+                <li><a href="#expertise">Especialidades</a></li>
+                <li><a href="#approach">Abordagem</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Disponível para projetos</div>
+                <h1>Soluções técnicas que <span>funcionam</span></h1>
+                <p class="hero-description">
+                    Engenheiro de soluções especializado em integração de sistemas, automação de processos e aplicações de inteligência artificial para resolver problemas reais de negócio.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">9+</div>
+                        <div class="stat-label">Projetos entregues</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Frentes de atuação</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Foco em resultado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">// Especialidades</p>
+                <h2 class="section-title">O que eu faço</h2>
+                <p class="section-description">
+                    Três frentes de atuação complementares que conectam dados, sistemas e automação.
+                </p>
+            </div>
+
+            <div class="expertise-grid">
+                <!-- Integrações -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">⚡</div>
+                    <h3 class="expertise-title">Integrações & Sistemas Corporativos</h3>
+                    <p class="expertise-description">
+                        Conexão entre sistemas, APIs bancárias e pipelines de dados automatizados com deploy em cloud.
+                    </p>
+                    <div class="expertise-projects">
+                        <h4>Projetos</h4>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>BB Integration</h5>
+                                <p>Extração e classificação automática de extratos bancários via API do Banco do Brasil com deploy em AWS Lambda.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Card Payment Reconciliation</h5>
+                                <p>Sistema de reconciliação de pagamentos via cartão com processamento FTPS, S3 e modelagem dimensional.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Sistema de Precificação Automatizado</h5>
+                                <p>Processamento de NFEs com cálculo automático de preços de custo/venda, integração com Google Sheets e GPT-4.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">AWS Lambda</span>
+                        <span class="tech-tag">S3</span>
+                        <span class="tech-tag">OAuth</span>
+                        <span class="tech-tag">FTPS</span>
+                        <span class="tech-tag">Google Sheets API</span>
+                    </div>
+                </div>
+
+                <!-- IA & LLMs -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">🧠</div>
+                    <h3 class="expertise-title">Inteligência Artificial & LLMs</h3>
+                    <p class="expertise-description">
+                        Aplicações práticas de IA para matching semântico, enriquecimento de dados e processamento de documentos.
+                    </p>
+                    <div class="expertise-projects">
+                        <h4>Projetos</h4>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Catalog Intelligence ML</h5>
+                                <p>Suite de ML para enriquecimento de catálogo com GPT-4, TF-IDF e integração com Snowflake e Google Sheets.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Matching Semântico de Produtos</h5>
+                                <p>Sistema híbrido com OpenAI Embeddings, KNN e re-ranking inteligente para associar produtos de pedidos ao catálogo.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>PDF Reader Especializado</h5>
+                                <p>Extração estruturada de dados de pedidos de compra usando Docling, regex e exportação automatizada.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">OpenAI GPT-4</span>
+                        <span class="tech-tag">Embeddings</span>
+                        <span class="tech-tag">TF-IDF</span>
+                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Docling</span>
+                        <span class="tech-tag">Snowflake</span>
+                    </div>
+                </div>
+
+                <!-- Automação & RPA -->
+                <div class="expertise-card">
+                    <div class="expertise-icon">🤖</div>
+                    <h3 class="expertise-title">Automação & RPA</h3>
+                    <p class="expertise-description">
+                        Automação de processos manuais repetitivos em sistemas desktop e web com execução agendada e logging.
+                    </p>
+                    <div class="expertise-projects">
+                        <h4>Projetos</h4>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>ERP Automation</h5>
+                                <p>RPA para automação de ERP de supermercado: extração de relatórios, ETL e sincronização com banco de dados online.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Web Automation PJe</h5>
+                                <p>Automação do sistema judicial PJe: extração de dados de processos, download de PDFs e registro no Legal One com LLM.</p>
+                            </div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-bullet"></div>
+                            <div class="project-content">
+                                <h5>Automação Desktop Uniplus</h5>
+                                <p>RPA para ajustes de estoque no ERP Uniplus usando reconhecimento de imagem e Win32 API.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Playwright</span>
+                        <span class="tech-tag">PyAutoGUI</span>
+                        <span class="tech-tag">Win32 API</span>
+                        <span class="tech-tag">Browser-Use</span>
+                        <span class="tech-tag">OpenCV</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="approach" class="how-i-work">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tag">// Abordagem</p>
+                <h2 class="section-title">Como eu trabalho</h2>
+                <p class="section-description">
+                    Metodologia prática focada em entregar valor real, não apenas código.
+                </p>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-card">
+                    <div class="approach-number">01</div>
+                    <h3>Entendimento do Problema</h3>
+                    <p>Antes de escrever uma linha de código, entendo profundamente o processo atual e o resultado esperado.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="approach-number">02</div>
+                    <h3>Solução Mínima Viável</h3>
+                    <p>Priorizo entregar rápido uma versão funcional que resolve o problema, depois itero com melhorias.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="approach-number">03</div>
+                    <h3>Integração Primeiro</h3>
+                    <p>Sistemas precisam conversar. Projeto pensando na integração entre dados, APIs e processos existentes.</p>
+                </div>
+                <div class="approach-card">
+                    <div class="approach-number">04</div>
+                    <h3>Automação Sustentável</h3>
+                    <p>Crio soluções com logs, monitoramento e tratamento de erros para rodar de forma autônoma.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Vamos conversar sobre seu projeto?</h2>
+                <p class="cta-description">
+                    Se você tem um problema técnico que precisa de solução prática, entre em contato.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:edivaldo414@gmail.com" class="btn btn-primary">
+                        <span>📧</span> edivaldo414@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/edivaldo-bezerra/" target="_blank" class="btn btn-secondary">
+                        <span>💼</span> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Desenvolvido por <a href="https://www.linkedin.com/in/edivaldo-bezerra/">Edivaldo Bezerra</a> — 2025</p>
+        </div>
+    </footer>
+</body>
+</html>
